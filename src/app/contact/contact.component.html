@@ -1,0 +1,47 @@
+<h1>Contact us now!</h1>
+
+<p>You can simply fill out the form below and somebody from our club will contact you. Thanks!</p>
+
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()" (reset)="onFormReset()">
+
+  <!-- <h6 *ngIf="ok">Your form is valid!</h6> -->
+
+  <label>
+    Full Name:
+    <input type="text" formControlName="name">
+    <div *ngIf="submitted && emailForm.controls['name'].errors" class="err">
+      <div *ngIf="emailForm.controls['name'].errors['required']">What is your full name?</div>
+      <div *ngIf="emailForm.controls['name'].errors['minlength']">A valid name needs to have at least 5 characters</div>
+    </div>
+  </label>
+
+  <label>
+    Email:
+    <input type="email" formControlName="email">
+    <div *ngIf="submitted && emailForm.controls['email'].errors" class="err">
+      <div *ngIf="emailForm.controls['email'].errors['required']">What is your email?</div>
+      <div *ngIf="emailForm.controls['email'].errors['pattern']">Please enter a valid email address.</div>
+    </div>
+  </label>
+
+  <label>
+    Message:
+    <textarea formControlName="message"></textarea>
+    <div *ngIf="submitted && emailForm.controls['message'].errors" class="err">
+        <div *ngIf="emailForm.controls['message'].errors['required']">What is your message to us?</div>
+    </div>
+  </label>
+
+  <input type="submit" value="Send Message" class="btnsub">
+  <input type="reset" value="Clear Form" class="btnsub">
+  <!-- <button type="submit" class="btnsub">Send Message</button>
+  <button type="reset" class="btnsub">Clear Form</button> -->
+
+</form>
+
+<section *ngIf="ok && submitted" class="finalresults">
+  <h4>Form submitted successfully...</h4>
+  <p><em>Full Name:</em> <span>{{ emailForm.controls['name'].value }}</span></p>
+  <p><em>Email:</em> <span>{{ emailForm.controls['email'].value }}</span></p>
+  <p><em>Message:</em> <span>{{ emailForm.controls['message'].value }}</span></p>
+</section>
